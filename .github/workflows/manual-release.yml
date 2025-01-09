@@ -206,7 +206,7 @@ jobs:
           # various issues we've encountered over time. Keep it in sync with the builtin-baseline
           # field in vcpkg.json. Caching happens as a post-action which runs at the end of
           # the whole workflow, after vcpkg install happens during msbuild run.
-          vcpkgGitCommitId: "66444e13a86da7087ee24c342f91801cc6eb9877"
+          vcpkgGitCommitId: "b322364f06308bdd24823f9d8f03fe0cc86fd46f"
       - name: Install dependencies (windows msvc) (3/3)
         if: runner.os == 'Windows'
         run: |
@@ -228,6 +228,7 @@ jobs:
           curl -L -o libbacktrace-${{ matrix.mxe }}-w64-mingw32.tar.gz https://github.com/Qrox/libbacktrace/releases/download/2020-01-03/libbacktrace-${{ matrix.mxe }}-w64-mingw32.tar.gz
           shasum -a 256 -c ./build-scripts/libbacktrace-${{ matrix.mxe }}-w64-mingw32-sha256
           sudo tar -xzf libbacktrace-${{ matrix.mxe }}-w64-mingw32.tar.gz --exclude=LICENSE -C /opt/mxe/usr/${{ matrix.mxe }}-w64-mingw32.static.gcc11
+
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux' && matrix.mxe == 'none' && matrix.android == 'none'
         run: |

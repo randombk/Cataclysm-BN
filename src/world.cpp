@@ -3,7 +3,14 @@
 #include <sstream>
 #include <cstring>
 #include <chrono>
-#include <sqlite3.h>
+
+// Dependency resolution for sqlite is handled a little differently on android builds
+#if defined(__ANDROID__)
+#   include "sqlite3.h"
+#else
+#   include <sqlite3.h>
+#endif
+
 #include <zlib.h>
 
 #include "game.h"

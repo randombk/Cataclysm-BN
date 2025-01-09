@@ -229,7 +229,7 @@ jobs:
         id: runvcpkg
         with:
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
-          vcpkgGitCommitId: "66444e13a86da7087ee24c342f91801cc6eb9877"
+          vcpkgGitCommitId: "b322364f06308bdd24823f9d8f03fe0cc86fd46f"
 
       - name: Integrate vcpkg
         if: runner.os == 'Windows'
@@ -347,6 +347,10 @@ jobs:
                ./gradlew -Pj=$((`nproc`+0)) bundleExperimentalRelease
                mv ./app/build/outputs/bundle/experimentalRelease/*.aab ../cbn-${{ matrix.artifact }}-${{ needs.metadata.outputs.tag_name }}.aab
           fi
+      
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: failure()
 
       - name: Upload release asset
         id: upload-release-asset
